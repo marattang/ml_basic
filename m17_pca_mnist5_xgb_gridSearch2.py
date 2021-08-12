@@ -13,6 +13,7 @@ from xgboost import XGBClassifier
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.callbacks import EarlyStopping
+from sklearn.metrics import accuracy_score
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -27,7 +28,7 @@ print(x_train.shape, x_test.shape) # (60000, 28, 28) (10000, 28, 28)
 x_train = x_train.reshape(60000, 28 * 28)
 x_test = x_test.reshape(10000, 28 * 28)
 
-pca = PCA(n_components=None)
+pca = PCA(n_components=486)
 x_train = pca.fit_transform(x_train)
 x_test = pca.transform(x_test)
 
@@ -42,11 +43,12 @@ print(sum(pca_EVR))
 cumsum = np.cumsum(pca_EVR)
 print(cumsum)
 print('count',np.argmax(cumsum >= 0.999)+1)
-'''
+# '''
 # pca를 통해 0.95 이상인거 몇 개? => 154
 
 # 1. 모델 구성
 # Tensorflow DNN으로 구성하고 기존 Tensorflow DNN 비교
+
 parameters = [
     {'n_estimators':[100, 200, 300], "learning_rate":[0.1, 0.3, 0.001, 0.01],
     "max_depth":[4,5,6]},
@@ -58,18 +60,18 @@ parameters = [
 ]
 n_jobs = -1
 
-model = GridSearchCV(XGBClassifier(), parameters)
-
+model = RandomizedSearchCV(XGBClassifier(), parameters, verbose=1)
+# model = XGBClassifier()
 # # 3. 컴파일, 훈련       metrics['acc']
 # model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-es = EarlyStopping(mode='min', monitor='val_loss', patience=15)
 model.fit(x_train, y_train)
 
 # # 4. 평가, 예측 predict X
-loss = model.evaluate(x_test, y_test)
-print('loss : ', loss[0])
-print('accuracy : ', loss[1])
-'''
+y_predict = model.predict(x_test)
+acc = accuracy_score(y_predict, y_test)
+print('acc : ', acc)
+
+# '''
 
 # acc로만 평가
 # CNN(4차원) -> accuracy :  0.98089998960495 -> 0.991까지 나옴.
@@ -79,3 +81,6 @@ print('accuracy : ', loss[1])
 # pca 사용 후
 # 154 : accuracy : 0.9805999994277954
 # 331 : accuracy : 0.9763000011444092
+
+# randomizeredsearch 사용 후
+# acc :  0.9800625015524402

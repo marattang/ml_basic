@@ -13,6 +13,7 @@ from xgboost import XGBClassifier
 from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.callbacks import EarlyStopping
+from sklearn.metrics import accuracy_score
 import warnings
 
 warnings.filterwarnings('ignore')
@@ -60,16 +61,17 @@ parameters = [
 n_jobs = -1
 
 model = RandomizedSearchCV(XGBClassifier(), parameters, verbose=1)
+# model = XGBClassifier()
+
 
 # # 3. 컴파일, 훈련       metrics['acc']
 # model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-es = EarlyStopping(mode='min', monitor='val_loss', patience=15)
 model.fit(x_train, y_train)
 
 # # 4. 평가, 예측 predict X
-loss = model.evaluate(x_test, y_test)
-print('loss : ', loss[0])
-print('accuracy : ', loss[1])
+y_predict = model.predict(x_test)
+acc = accuracy_score(y_predict, y_test)
+print('acc : ', acc)
 # '''
 
 # acc로만 평가
@@ -80,3 +82,5 @@ print('accuracy : ', loss[1])
 # pca 사용 후
 # 154 : accuracy : 0.9805999994277954
 # 331 : accuracy : 0.9763000011444092
+# randomizeredsearch 사용 후
+# acc :  0.9673

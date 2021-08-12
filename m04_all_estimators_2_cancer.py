@@ -1,8 +1,3 @@
-from sklearn.svm import LinearSVC, SVC
-from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import r2_score, accuracy_score
 import numpy as np
 from sklearn.datasets import load_breast_cancer
