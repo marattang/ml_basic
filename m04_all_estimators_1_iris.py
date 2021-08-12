@@ -1,15 +1,8 @@
-import numpy as np
 from sklearn.utils import all_estimators
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler , StandardScaler, PowerTransformer
-from tensorflow.keras.callbacks import EarlyStopping
-from sklearn.svm import LinearSVC, SVC
-from sklearn.neighbors import KNeighborsClassifier, KNeighborsRegressor
-from sklearn.linear_model import LogisticRegression
-from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
-from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import r2_score, accuracy_score
 import warnings
 

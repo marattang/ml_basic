@@ -6,12 +6,8 @@ from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import r2_score, accuracy_score
 import numpy as np
 from sklearn.datasets import load_breast_cancer
-from tensorflow.keras.layers import Dense, Input
-from tensorflow.keras.models import Model
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MaxAbsScaler, MinMaxScaler, RobustScaler, StandardScaler, QuantileTransformer, PowerTransformer
-import matplotlib.pyplot as plt
-from tensorflow.keras.callbacks import EarlyStopping
 
 datasets = load_breast_cancer()
 # 1. 데이터
@@ -31,14 +27,6 @@ print(y[:20])
 print(np.unique(y))
 
 # 2. 모델
-# input = Input(shape=(30,))
-# dense1 = Dense(128)(input)
-# dense2 = Dense(64)(dense1)
-# dense3 = Dense(64)(dense2)
-# dense4 = Dense(32)(dense3)
-# dense5 = Dense(16)(dense4)
-# output = Dense(1, activation='sigmoid')(dense5)
-
 scaler = RobustScaler()
 scaler.fit(x_train)
 x_train = scaler.transform(x_train)

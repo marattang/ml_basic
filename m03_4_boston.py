@@ -7,32 +7,17 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier, DecisionTreeRegressor
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import r2_score, accuracy_score
-
 import numpy as np
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense
-from sklearn.metrics import r2_score
 from sklearn.datasets import load_boston
 from sklearn.model_selection import train_test_split
 
 datasets = load_boston()
 x = datasets.data
 y = datasets.target
-'''
-model = Sequential()
-model.add(Dense(55, input_dim=13))
-model.add(Dense(38, activation='relu'))
-model.add(Dense(27, activation='relu'))
-model.add(Dense(19, activation='relu'))
-model.add(Dense(10, activation='relu'))
-model.add(Dense(5, activation='relu'))
-model.add(Dense(1))
-'''
+
 x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=5, shuffle=True, test_size=0.3)
 
 model = RandomForestRegressor()
-# model.compile(loss="mse", optimizer="adam", loss_weights=1)
-# model.fit(x_train, y_train, epochs=100, batch_size=32, validation_split=0.15)
 model.fit(x_train, y_train)
 
 result = model.score(x_test, y_test)
