@@ -8,7 +8,7 @@
 # 5. 중위값                  [1, 4.5, 4.5, 8, 10]
 # 6. 보간
 # 7. 모델링 - predict 
-# 8. 부스트계열은 결측치에 대해 자유(?)롭다. -> 
+# 8. 부스트계열은 결측치에 대해 자유(?)롭다. -> Tree 계열 DT, RF, XG, LGBM...
 
 from datetime import datetime
 import numpy as np

@@ -3,6 +3,8 @@
 # 2. Nan처리 후 -> 보간 /// linear
 # 3. ....(글측치 처리 방법 유사)
 # 확실해보이는 데이터는 데이터를 삭제하지 않는다. 데이터를 수정해서 처리할지, 데이터를 증폭샇지 판단해야하.
+# 4. scaler -> RobustScaler, QuantileTransformer
+# 5. 모델링 : Tree 계열 DT, RF, XG, LGBM...
 
 import numpy as np
 
