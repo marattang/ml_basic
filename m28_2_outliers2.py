@@ -27,7 +27,8 @@ def outlier(data_out):
     print('upper_bound',upper_bound)
     return np.where((data_out>upper_bound) | (data_out<lower_bound))
 # 분위값은 데이터에서 딱 떨어지는 수치는 아니고, 위치가 된다. 그렇기 때문에 데이터에 없는 값이 나올 수도 있다.
-outliers_loc = list(map(lambda x : outlier(x), aaa))
+outliers_loc = outlier(aaa)
+# outliers_loc = list(map(lambda x : outlier(x), aaa))
 # outliers_loc = df.apply(lambda x: outlier(x))
 print('이상치의 위치 : ', outliers_loc)
 
