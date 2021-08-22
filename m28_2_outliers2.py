@@ -3,16 +3,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 from sklearn.datasets import load_diabetes
 
-aaa = np.array([[1      ,2      ,10000, 3,     4,      10000,       6,      7,      8,   90,     100,    5000],
-                [1000   ,2000   ,3,     4000,  5000,   6000,        7000,   8,      9000,   10000,  1001]])
+aaa = np.array([[1,2,10000,3,4,10000,6,7,8,90,100,5000],
+                [1000,2000,3,4000,5000,300,500,8,200,100,100]])
 # (2, 10) -> (10, 2)
 datasets = load_diabetes()
 x = datasets.data
 y = datasets.target
 df = pd.DataFrame(np.c_[datasets.data, datasets.target], columns=datasets.feature_names + ['target'])
 # print(df.columns)
-
-aaa = aaa.transpose()
 print(aaa.shape)
 aaa = aaa.tolist()
 def outlier(data_out):
@@ -27,10 +25,12 @@ def outlier(data_out):
     print('upper_bound',upper_bound)
     return np.where((data_out>upper_bound) | (data_out<lower_bound))
 # 분위값은 데이터에서 딱 떨어지는 수치는 아니고, 위치가 된다. 그렇기 때문에 데이터에 없는 값이 나올 수도 있다.
-outliers_loc = outlier(aaa)
-# outliers_loc = list(map(lambda x : outlier(x), aaa))
+# outliers_loc = outlier(aaa)
+# 리스트
+outliers_loc = list(map(lambda x : outlier(x), aaa))
+
 # outliers_loc = df.apply(lambda x: outlier(x))
-print('이상치의 위치 : ', outliers_loc)
+print('이상치의 위치 : ', outliers_loc[0][0])
 
 # 시각화
 # 실습
